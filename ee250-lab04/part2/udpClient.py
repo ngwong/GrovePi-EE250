@@ -3,8 +3,8 @@ import socket
 def Main():
     # Change the host and port as needed. For ports, use a number in the 9000 
     # range. 
-    host = '127.0.0.1'
-    port = 1023
+    host = '192.168.1.174'
+    port = 9001
 
     server_addr = '127.0.0.1'
 
