@@ -11,10 +11,10 @@ import socket
 def Main():
     # Change the host and port as needed. For ports, use a number in the 9000 
     # range. 
-    host = '192.168.1.168'
+    host = '10.0.2.15'
     port = 8001
 
-    server_addr = '192.168.1.174'
+    server_addr = '192.168.1.248'
 
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) 
     s.bind((host,port))
