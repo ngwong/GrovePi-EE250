@@ -3,7 +3,7 @@ import sys
 # we are successfully `from grovepi import *`
 sys.path.append('../../Software/Python/')
 
-from grovepi import *
+#from grovepi import *
 import grovepi
 import socket
 
@@ -31,17 +31,3 @@ def Process1():
 
 if __name__ == '__main__':
     Process1()
-
-# Connect the Grove Ultrasonic Ranger to digital port D4
-# SIG,NC,VCC,GND
-ultrasonic_ranger = 3
-
-while True:
-    try:
-        # Read distance value from Ultrasonic
-        print(grovepi.ultrasonicRead(ultrasonic_ranger))
-
-    except TypeError:
-        print ("Error")
-    except IOError:
-        print ("Error")
