@@ -19,10 +19,24 @@ def Main():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) 
     s.bind((host,port))
 
+    # Connect the Grove Ultrasonic Ranger to digital port D4
+	# SIG,NC,VCC,GND
+	ultrasonic_ranger = 3
+
+	while True:
+	    try:
+	        # Read distance value from Ultrasonic
+	        message = grovepi.ultrasonicRead(ultrasonic_ranger)
+
+	    except TypeError:
+	        print ("Error")
+	    except IOError:
+	        print ("Error")
+
     # UDP is connectionless, so a client does not formally connect to a server
     # before sending a message.
     dst_port = input("destination port-> ")
-    message = input("message-> ")
+    # message = input("message-> ")
     while message != 'q':
         #tuples are immutable so we need to overwrite the last tuple
         server = (server_addr, int(dst_port))
@@ -38,3 +52,5 @@ def Main():
 
 if __name__ == '__main__':
     Main()
+
+
