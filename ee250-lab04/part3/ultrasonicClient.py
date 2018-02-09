@@ -3,8 +3,9 @@ import sys
 # we are successfully `from grovepi import *`
 sys.path.append('../../Software/Python/')
 
-from grovepi import *
+#from grovepi import *
 
+import grovepi
 #use UDP
 import socket
 
@@ -20,23 +21,13 @@ def Main():
     s.bind((host,port))
 
     # Connect the Grove Ultrasonic Ranger to digital port D4
-	# SIG,NC,VCC,GND
-	ultrasonic_ranger = 3
-
-	while True:
-	    try:
-	        # Read distance value from Ultrasonic
-	        message = grovepi.ultrasonicRead(ultrasonic_ranger)
-
-	    except TypeError:
-	        print ("Error")
-	    except IOError:
-	        print ("Error")
+    # SIG,NC,VCC,GND
+    ultrasonic_ranger = 3
 
     # UDP is connectionless, so a client does not formally connect to a server
     # before sending a message.
     dst_port = input("destination port-> ")
-    # message = input("message-> ")
+    message = str(grovepi.ultrasonicRead(ultrasonic_ranger))
     while message != 'q':
         #tuples are immutable so we need to overwrite the last tuple
         server = (server_addr, int(dst_port))
@@ -47,7 +38,15 @@ def Main():
         data = data.decode('utf-8')
         print("Received from server: " + data)
         dst_port = input("destination port-> ")
-        message = input("message-> ")
+        try:
+	    # Read distance value from Ultrasonic
+            message = str(grovepi.ultrasonicRead(ultrasonic_ranger))
+
+        except TypeError:
+	    print ("Error")
+	except IOError:
+	    print ("Error")
+    
     s.close()
 
 if __name__ == '__main__':
