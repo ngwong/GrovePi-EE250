@@ -37,7 +37,7 @@ def Main():
         data, addr = s.recvfrom(1024)
         data = data.decode('utf-8')
         print("Received from server: " + data)
-        dst_port = input("destination port-> ")
+        dst_port = 8000
         try:
 	    # Read distance value from Ultrasonic
             message = str(grovepi.ultrasonicRead(ultrasonic_ranger))
