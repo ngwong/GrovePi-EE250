@@ -43,9 +43,9 @@ def Main():
             message = str(grovepi.ultrasonicRead(ultrasonic_ranger))
 
         except TypeError:
-	       print ("Error")
+            print ("Error")
 	    except IOError:
-	       print ("Error")
+            print ("Error")
     
     s.close()
 
