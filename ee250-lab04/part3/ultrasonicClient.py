@@ -44,7 +44,7 @@ def Main():
 
         except TypeError:
             print ("Error")
-	    except IOError:
+        except IOError:
             print ("Error")
     
     s.close()
