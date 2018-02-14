@@ -26,7 +26,7 @@ def Main():
 
     # UDP is connectionless, so a client does not formally connect to a server
     # before sending a message.
-    dst_port = input("destination port-> ")
+    dst_port = 8000
     message = str(grovepi.ultrasonicRead(ultrasonic_ranger))
     while message != 'q':
         #tuples are immutable so we need to overwrite the last tuple
