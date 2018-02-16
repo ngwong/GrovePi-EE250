@@ -15,7 +15,7 @@ def Main():
     host = '192.168.1.166'
     port = 8000
 
-    server_addr = '192.168.1.176'
+    server_addr = '192.168.1.174'
 
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) 
     s.bind((host,port))
