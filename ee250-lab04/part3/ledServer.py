@@ -11,7 +11,7 @@ import socket
 led = 2
 
 def Main():
-    host = '192.168.1.168'
+    host = '192.168.1.166'
     port = 6000
 
     s = socket.socket()
@@ -38,7 +38,7 @@ def Main():
             try:
                 digitalWrite(led,0)
                 data = "LED is now OFF"
-            except: IOError:
+            except IOError:
                 print("Error");
         else:
             data = "Error: Resend Message"
