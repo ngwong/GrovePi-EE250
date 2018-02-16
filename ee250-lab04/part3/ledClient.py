@@ -12,7 +12,7 @@ def Main():
     """127.0.0.1 is the loopback address. Any packets sent to this address will
     essentially loop right back to your machine and look for any process 
     listening in on the port specified."""
-    host = '192.168.1.168'
+    host = '192.168.1.166'
     port = 6000
     #led = 4
 
