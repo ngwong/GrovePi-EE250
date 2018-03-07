@@ -5,6 +5,8 @@ Run vm_subscriber.py in a separate terminal on your VM."""
 import paho.mqtt.client as mqtt
 import time
 
+ultrasonic = ""
+
 def on_connect(client, userdata, flags, rc):
     print("Connected to server (i.e., broker) with result code "+str(rc))
 
