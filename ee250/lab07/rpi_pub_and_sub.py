@@ -60,7 +60,7 @@ if __name__ == '__main__':
         #print("delete this line")
         if (grovepi.digitalRead(button) > 0):
             client.publish("anrg-pi10/button", "Button pressed!")
-            setText("Button pressed!")
+            setText("Button pressed")
 
 
         client.publish("anrg-pi10/ultrasonicRanger", grovepi.ultrasonicRead(ultra))
