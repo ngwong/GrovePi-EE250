@@ -21,12 +21,12 @@ def on_message(client, userdata, msg):
 #Custom callbacks need to be structured with three args like on_message()
 def custom_callback(client, userdata, message):
     #the third argument is 'message' here unlike 'msg' in on_message 
-    if (str(message.payload) == "LED_ON"):
+    if ("LED_ON" in str(message.payload) ):
         try:
             digitalWrite(led, 1)
         except IOError:
             print ("Error")
-    elif (str(message.payload) == "LED_OFF"):
+    elif ("LED_OFF" in str(message.payload) ):
         try:
             digitalWrite(led, 0)
         except IOError:
