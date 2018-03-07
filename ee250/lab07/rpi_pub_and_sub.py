@@ -5,6 +5,7 @@ Run rpi_pub_and_sub.py on your Raspberry Pi."""
 import paho.mqtt.client as mqtt
 import time
 from grovepi import *
+import grovepi
 
 led = 6
 ultra = 5
