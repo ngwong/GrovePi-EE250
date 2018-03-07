@@ -4,7 +4,6 @@ Run rpi_pub_and_sub.py on your Raspberry Pi."""
 
 import paho.mqtt.client as mqtt
 import time
-from pynput import keyboard
 from grovepi import *
 
 led = 6
