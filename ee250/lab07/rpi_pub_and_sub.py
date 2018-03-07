@@ -18,6 +18,12 @@ def on_connect(client, userdata, flags, rc):
     print("Connected to server (i.e., broker) with result code "+str(rc))
 
     grovepi.pinMode(button, "INPUT")
+
+    client.subscribe("anrg-pi10/led")
+    client.message_callback_add("anrg-pi10/led", custom_callback_led)
+
+    client.subscribe("anrg-pi10/lcd")
+    client.message_callback_add("anrg-pi10/lcd", custom_callback_lcd)
     #subscribe to topics of interest here
 
 #Default message callback. Please use custom callbacks.
@@ -25,7 +31,7 @@ def on_message(client, userdata, msg):
     print("on_message: " + msg.topic + " " + str(msg.payload))
 
 #Custom callbacks need to be structured with three args like on_message()
-def custom_callback(client, userdata, message):
+def custom_callback_led(client, userdata, message):
     #the third argument is 'message' here unlike 'msg' in on_message 
     if ("LED_ON" in str(message.payload)):
         try:
@@ -38,10 +44,12 @@ def custom_callback(client, userdata, message):
         except IOError:
             print ("Error")
 
-    print("custom_callback: " + message.topic + " " + str(message.payload))
-    print("custom_callback: message.payload is of type " + 
+    print("custom_callback_led: " + message.topic + " " + str(message.payload))
+    print("custom_callback_led: message.payload is of type " + 
           str(type(message.payload)))
 
+def custom_callback_lcd(client, userdata, message):
+    setText(str(message))
 
 if __name__ == '__main__':
     #this section is covered in publisher_and_subscriber_example.py
@@ -51,15 +59,12 @@ if __name__ == '__main__':
     client.connect(host="eclipse.usc.edu", port=11000, keepalive=60)
     client.loop_start()
 
-    client.subscribe("anrg-pi10/led")
-    client.message_callback_add("anrg-pi10/led", custom_callback)
-
     while True:
         
         #print("delete this line")
         if (grovepi.digitalRead(button) > 0):
             client.publish("anrg-pi10/button", "Button pressed!")
-            setText("Button pressed")
+            setText("Button pressed!")
 
 
         client.publish("anrg-pi10/ultrasonicRanger", grovepi.ultrasonicRead(ultra))
