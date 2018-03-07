@@ -26,6 +26,10 @@ def on_press(key):
         #send "w" character to rpi
     elif k == 'a':
         print("a")
+        client.publish("anrg10/led", "LED_ON")
+        client.subscribe("anrg-pi0/customCallback")
+        client.message_callback_add("anrg-pi0/customCallback", custom_callback)
+
         # send "a" character to rpi
         #send "LED_ON"
     elif k == 's':
@@ -35,6 +39,13 @@ def on_press(key):
         print("d")
         # send "d" character to rpi
         # send "LED_OFF"
+
+#Custom callbacks need to be structured with three args like on_message()
+def custom_callback(client, userdata, message):
+    #the third argument is 'message' here unlike 'msg' in on_message 
+    print("custom_callback: " + message.topic + " " + str(message.payload))
+    print("custom_callback: message.payload is of type " + 
+          str(type(message.payload)))
 
 if __name__ == '__main__':
     #setup the keyboard event listener
