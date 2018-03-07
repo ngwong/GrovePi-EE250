@@ -31,7 +31,7 @@ def on_press(key):
         #send "w" character to rpi
     elif k == 'a':
         print("a")
-        client.publish("anrg10/led", "LED_ON")
+        client.publish("anrg-pi10/led", "LED_ON")
         # send "a" character to rpi
         #send "LED_ON"
     elif k == 's':
