@@ -51,4 +51,5 @@ if __name__ == '__main__':
     while True:
         
         #print("delete this line")
+        client.publish("anrg-pi10/ultrasonicRanger", grovepi.ultrasonicRead(ultra))
         time.sleep(1)
