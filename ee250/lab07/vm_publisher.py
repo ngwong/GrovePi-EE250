@@ -6,8 +6,13 @@ import paho.mqtt.client as mqtt
 import time
 from pynput import keyboard
 
+ultrasonic = ""
+
 def on_connect(client, userdata, flags, rc):
     print("Connected to server (i.e., broker) with result code "+str(rc))
+
+    client.subscribe("anrg-pi10/ultrasonicRanger")
+    client.message_callback_add("anrg-pi10/ultrasonicRanger", custom_callback)
 
     #subscribe to topics of interest here
 
@@ -27,9 +32,6 @@ def on_press(key):
     elif k == 'a':
         print("a")
         client.publish("anrg10/led", "LED_ON")
-        client.subscribe("anrg-pi0/customCallback")
-        client.message_callback_add("anrg-pi0/customCallback", custom_callback)
-
         # send "a" character to rpi
         #send "LED_ON"
     elif k == 's':
@@ -37,12 +39,14 @@ def on_press(key):
         # send "s" character to rpi
     elif k == 'd':
         print("d")
+        client.publish("anrg-pi10/led", "LED_OFF")
         # send "d" character to rpi
         # send "LED_OFF"
 
 #Custom callbacks need to be structured with three args like on_message()
 def custom_callback(client, userdata, message):
     #the third argument is 'message' here unlike 'msg' in on_message 
+    ultrasonic = str(message.payload)
     print("custom_callback: " + message.topic + " " + str(message.payload))
     print("custom_callback: message.payload is of type " + 
           str(type(message.payload)))
@@ -61,6 +65,5 @@ if __name__ == '__main__':
 
     while True:
         #print("delete this line")
+        print(str(ultrasonic))
         time.sleep(1)
-            
-
