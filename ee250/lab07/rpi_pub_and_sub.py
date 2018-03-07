@@ -49,7 +49,7 @@ def custom_callback_led(client, userdata, message):
           str(type(message.payload)))
 
 def custom_callback_lcd(client, userdata, message):
-    setText(str(message))
+    setText(str(message.payload))
 
 if __name__ == '__main__':
     #this section is covered in publisher_and_subscriber_example.py
