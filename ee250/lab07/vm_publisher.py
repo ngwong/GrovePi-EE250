@@ -11,9 +11,6 @@ ultrasonic = ""
 def on_connect(client, userdata, flags, rc):
     print("Connected to server (i.e., broker) with result code "+str(rc))
 
-    client.subscribe("anrg-pi10/ultrasonicRanger")
-    client.message_callback_add("anrg-pi10/ultrasonicRanger", custom_callback)
-
     #subscribe to topics of interest here
 
 #Default message callback. Please use custom callbacks.
@@ -43,14 +40,6 @@ def on_press(key):
         # send "d" character to rpi
         # send "LED_OFF"
 
-#Custom callbacks need to be structured with three args like on_message()
-def custom_callback(client, userdata, message):
-    #the third argument is 'message' here unlike 'msg' in on_message 
-    ultrasonic = str(message.payload)
-    print("custom_callback: " + message.topic + " " + str(message.payload))
-    print("custom_callback: message.payload is of type " + 
-          str(type(message.payload)))
-
 if __name__ == '__main__':
     #setup the keyboard event listener
     lis = keyboard.Listener(on_press=on_press)
@@ -65,5 +54,4 @@ if __name__ == '__main__':
 
     while True:
         #print("delete this line")
-        print(str(ultrasonic))
         time.sleep(1)

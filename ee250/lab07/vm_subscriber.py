@@ -9,11 +9,22 @@ from pynput import keyboard
 def on_connect(client, userdata, flags, rc):
     print("Connected to server (i.e., broker) with result code "+str(rc))
 
+    client.subscribe("anrg-pi10/ultrasonicRanger")
+    client.message_callback_add("anrg-pi10/ultrasonicRanger", custom_callback)
+
     #subscribe to the ultrasonic ranger topic here
 
 #Default message callback. Please use custom callbacks.
 def on_message(client, userdata, msg):
     print("on_message: " + msg.topic + " " + str(msg.payload))
+
+#Custom callbacks need to be structured with three args like on_message()
+def custom_callback(client, userdata, message):
+    #the third argument is 'message' here unlike 'msg' in on_message 
+    ultrasonic = str(message.payload)
+    print("custom_callback: " + message.topic + " " + str(message.payload))
+    print("custom_callback: message.payload is of type " + 
+          str(type(message.payload)))
 
 def on_press(key):
 if __name__ == '__main__':
@@ -25,7 +36,7 @@ if __name__ == '__main__':
     client.loop_start()
 
     while True:
-        print("delete this line")
+        print(str(ultrasonic))
         time.sleep(1)
             
 
