@@ -46,7 +46,7 @@ if __name__ == '__main__':
     client.loop_start()
 
     client.subscribe("anrg-pi10/led")
-    client.message_callback_add("anrg-pi10/led", custom_call_back)
+    client.message_callback_add("anrg-pi10/led", custom_callback)
 
     while True:
         
