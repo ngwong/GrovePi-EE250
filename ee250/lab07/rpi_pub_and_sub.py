@@ -13,7 +13,6 @@ led = 6
 ultra = 5
 
 button = 3
-lcd = 2
 
 def on_connect(client, userdata, flags, rc):
     print("Connected to server (i.e., broker) with result code "+str(rc))
