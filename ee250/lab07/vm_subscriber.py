@@ -14,7 +14,7 @@ def on_connect(client, userdata, flags, rc):
     client.message_callback_add("anrg-pi10/ultrasonicRanger", custom_callback_ultrasonic)
 
     client.subscribe("anrg-pi10/button")
-    client.message_callback_add("anrg-pi10/button, custom_callback_button")
+    client.message_callback_add("anrg-pi10/button", custom_callback_button)
     #subscribe to the ultrasonic ranger topic here
 
 #Default message callback. Please use custom callbacks.
