@@ -30,7 +30,7 @@ def custom_callback_ultrasonic(client, userdata, message):
           str(type(message.payload)))
 
 def custom_callback_button(client, userdata, message):
-    print("Button pressed!")
+    print(str(message.payload))
 
 if __name__ == '__main__':
     #this section is covered in publisher_and_subscriber_example.py
