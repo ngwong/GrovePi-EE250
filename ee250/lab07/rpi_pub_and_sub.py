@@ -16,6 +16,7 @@ lcd = 2
 def on_connect(client, userdata, flags, rc):
     print("Connected to server (i.e., broker) with result code "+str(rc))
 
+    grovepi.pinMode(button, "INPUT")
     #subscribe to topics of interest here
 
 #Default message callback. Please use custom callbacks.
@@ -55,5 +56,6 @@ if __name__ == '__main__':
     while True:
         
         #print("delete this line")
+        client.publish(grovepi.digitalRead(button))
         client.publish("anrg-pi10/ultrasonicRanger", grovepi.ultrasonicRead(ultra))
         time.sleep(1)
