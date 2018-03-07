@@ -56,6 +56,8 @@ if __name__ == '__main__':
     while True:
         
         #print("delete this line")
-        client.publish(grovepi.digitalRead(button))
+        if (grovepi.digitalRead(button) > 0):
+            client.publish("anrg-pi10/button")
+            
         client.publish("anrg-pi10/ultrasonicRanger", grovepi.ultrasonicRead(ultra))
         time.sleep(1)
