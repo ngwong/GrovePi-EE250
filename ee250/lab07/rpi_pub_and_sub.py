@@ -32,24 +32,26 @@ def on_message(client, userdata, msg):
 
 #Custom callbacks need to be structured with three args like on_message()
 def custom_callback_led(client, userdata, message):
-    #the third argument is 'message' here unlike 'msg' in on_message 
-    if ("LED_ON" in str(message.payload)):
+    #the third argument is 'message' here unlike 'msg' in on_message
+    convMessage = str(message.payload, "utf-8") 
+    if ("LED_ON" in convMessage):
         try:
             digitalWrite(led, 1)
         except IOError:
             print ("Error")
-    elif ("LED_OFF" in str(message.payload) ):
+    elif ("LED_OFF" in convMessage ):
         try:
             digitalWrite(led, 0)
         except IOError:
             print ("Error")
 
-    print("custom_callback_led: " + message.topic + " " + str(message.payload))
+    print("custom_callback_led: " + message.topic + " " + convMessage)
     print("custom_callback_led: message.payload is of type " + 
           str(type(message.payload)))
 
 def custom_callback_lcd(client, userdata, message):
-    setText(str(message.payload))
+    convMessage2 = str(message.payload, "utf-8")
+    setText(convMessage2)
 
 if __name__ == '__main__':
     #this section is covered in publisher_and_subscriber_example.py
