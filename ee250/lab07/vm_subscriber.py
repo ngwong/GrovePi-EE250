@@ -24,13 +24,14 @@ def on_message(client, userdata, msg):
 #Custom callbacks need to be structured with three args like on_message()
 def custom_callback_ultrasonic(client, userdata, message):
     #the third argument is 'message' here unlike 'msg' in on_message 
-    ultrasonic = str(message.payload)
-    print("custom_callback_ultrasonic: " + message.topic + " " + str(message.payload))
+    ultrasonic = str(message.payload, "utf-8")
+    print("custom_callback_ultrasonic: " + message.topic + " " + ultrasonic)
     print("custom_callback_ultrasonic: message.payload is of type " + 
           str(type(message.payload)))
 
 def custom_callback_button(client, userdata, message):
-    print(str(message.payload))
+    convMessage = str(message.payload, "utf-8")
+    print(convMessage)
 
 if __name__ == '__main__':
     #this section is covered in publisher_and_subscriber_example.py
@@ -41,7 +42,7 @@ if __name__ == '__main__':
     client.loop_start()
 
     while True:
-        print(str(ultrasonic))
+        print('\n')
         time.sleep(1)
             
 
