@@ -21,7 +21,6 @@ def on_connect(client, userdata, flags, rc): #sets up where to subscribe to
 def on_message(client, userdata, msg):
     print("on_message: " + msg.topic + " " + str(msg.payload, "utf-8"))
 
-<<<<<<< HEAD
 #Custom callbacks need to be structured with three args like on_message()
 def custom_callback_ultrasonic(client, userdata, message):
     #the third argument is 'message' here unlike 'msg' in on_message 
@@ -35,8 +34,6 @@ def custom_callback_button(client, userdata, message):
     convMessage = str(message.payload, "utf-8") #converts bit str to string
     print(convMessage) #prints message
 
-=======
->>>>>>> upstream/sp18-master
 if __name__ == '__main__':
     #this section is covered in publisher_and_subscriber_example.py
     client = mqtt.Client()

@@ -4,7 +4,6 @@ Run rpi_pub_and_sub.py on your Raspberry Pi."""
 
 import paho.mqtt.client as mqtt
 import time
-<<<<<<< HEAD
 from grovepi import *
 import grovepi
 
@@ -14,8 +13,7 @@ led = 6
 ultra = 5
 
 button = 3
-=======
->>>>>>> upstream/sp18-master
+
 
 def on_connect(client, userdata, flags, rc):
     print("Connected to server (i.e., broker) with result code "+str(rc))
@@ -33,7 +31,6 @@ def on_connect(client, userdata, flags, rc):
 def on_message(client, userdata, msg):
     print("on_message: " + msg.topic + " " + str(msg.payload, "utf-8"))
 
-<<<<<<< HEAD
 #Custom callbacks need to be structured with three args like on_message()
 def custom_callback_led(client, userdata, message):
     #the third argument is 'message' here unlike 'msg' in on_message
@@ -57,8 +54,7 @@ def custom_callback_lcd(client, userdata, message):
     convMessage2 = str(message.payload, "utf-8") #converts message payload from byte string to string
     setText(convMessage2)#prints onto LED board
 
-=======
->>>>>>> upstream/sp18-master
+
 if __name__ == '__main__':
     #this section is covered in publisher_and_subscriber_example.py
     client = mqtt.Client()
