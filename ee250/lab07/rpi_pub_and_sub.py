@@ -33,15 +33,15 @@ def on_message(client, userdata, msg):
 #Custom callbacks need to be structured with three args like on_message()
 def custom_callback_led(client, userdata, message):
     #the third argument is 'message' here unlike 'msg' in on_message
-    convMessage = str(message.payload, "utf-8") 
-    if ("LED_ON" in convMessage):
+    convMessage = str(message.payload, "utf-8") #converts massage payload from byte string to string
+    if ("LED_ON" in convMessage): #checks payload if LED ON
         try:
-            digitalWrite(led, 1)
+            digitalWrite(led, 1) #turns on LED
         except IOError:
             print ("Error")
-    elif ("LED_OFF" in convMessage ):
+    elif ("LED_OFF" in convMessage ): #checks payload if LED OFF
         try:
-            digitalWrite(led, 0)
+            digitalWrite(led, 0) #turns off LED
         except IOError:
             print ("Error")
 
@@ -50,8 +50,8 @@ def custom_callback_led(client, userdata, message):
           str(type(message.payload)))
 
 def custom_callback_lcd(client, userdata, message):
-    convMessage2 = str(message.payload, "utf-8")
-    setText(convMessage2)
+    convMessage2 = str(message.payload, "utf-8") #converts message payload from byte string to string
+    setText(convMessage2)#prints onto LED board
 
 if __name__ == '__main__':
     #this section is covered in publisher_and_subscriber_example.py
@@ -64,10 +64,10 @@ if __name__ == '__main__':
     while True:
         
         #print("delete this line")
-        if (grovepi.digitalRead(button) > 0):
-            client.publish("anrg-pi10/button", "Button pressed!")
-            setText("Button pressed!")
+        if (grovepi.digitalRead(button) > 0):#checks for button press
+            client.publish("anrg-pi10/button", "Button pressed!")#publishes button press data
+            setText("Button pressed!")#prints out to LCD
 
 
-        client.publish("anrg-pi10/ultrasonicRanger", grovepi.ultrasonicRead(ultra))
-        time.sleep(1)
+        client.publish("anrg-pi10/ultrasonicRanger", grovepi.ultrasonicRead(ultra))#publishes ultrasonic data
+        time.sleep(1) #timer so that ultrasonic only sends every second
