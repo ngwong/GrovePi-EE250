@@ -51,12 +51,14 @@ def on_message(client, userdata, msg):
 # This updates the moving average buffer so the newest element 
 # is the average of the last AVERAGE_SIZE of ranger1
 def update_average_ranger1():
+	global ranger1_average
 	ranger1_average.append(sum(ranger1_dist[-AVERAGE_SIZE:])/AVERAGE_SIZE)
 	ranger1_average = ranger1_average[-MAX_LIST_LENGTH:]
 
 # This updates the moving average buffer so the newest element 
 # is the average of the last AVERAGE_SIZE of ranger1
 def update_average_ranger2():
+	global ranger2_average
 	ranger2_average.append(sum(ranger2_dist[-AVERAGE_SIZE:])/AVERAGE_SIZE)
 	ranger2_average = ranger2_average[-MAX_LIST_LENGTH:]
 
