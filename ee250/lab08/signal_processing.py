@@ -84,21 +84,24 @@ def msg_direction(avg_list_ranger1, avg_list_ranger2):
 	tot_ranger1 = sum(calc_change(avg_list_ranger1))/len(avg_list_ranger1)
 	tot_ranger2 = sum(calc_change(avg_list_ranger2))/len(avg_list_ranger2)
 
+	# Start of state machine approach
 	global in_ranger1
 	global in_ranger2
 
 	prev_ranger1 = in_ranger1
 	prev_ranger2 = in_ranger2
 
-	if (avg_ranger1 > OUT_OF_RANGE):
+	if (avg_list_ranger1[-1:][0] > OUT_OF_RANGE):
 		in_ranger1 = False
 	else:
 		in_ranger1 = True
 
-	if (avg_ranger2 > OUT_OF_RANGE):
+	if (avg_list_ranger2[-1:][0] > OUT_OF_RANGE):
 		in_ranger2 = False
 	else:
 		in_ranger2 = True
+
+	# End of state machine approach
 
 	print ("average ranger 1: " + str(avg_list_ranger1) + ", average ranger 2: " + str(avg_list_ranger2))
 	print ("total ranger 1: " + str(tot_ranger1) + ", total ranger 2: " + str(tot_ranger2))
@@ -117,7 +120,7 @@ def msg_direction(avg_list_ranger1, avg_list_ranger2):
 		if (prev_ranger1 and not in_ranger1 and not in_ranger2):
 			return "Moving Left"
 		#elif ((tot_ranger1 > STATIONARY_MARGIN) or (tot_ranger2 < -STATIONARY_MARGIN)):
-		elif: (prev_ranger2 and not in_ranger2 and not in_ranger1):
+		elif (prev_ranger2 and not in_ranger2 and not in_ranger1):
 			return "Moving Right"
 		else:
 			return "Can't tell"
