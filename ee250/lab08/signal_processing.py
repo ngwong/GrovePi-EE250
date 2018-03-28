@@ -90,9 +90,9 @@ def msg_direction(avg_list_ranger1, avg_list_ranger2):
 			return "Still - Middle"
 	else:
 		if ((tot_ranger1 < -STATIONARY_MARGIN) or (tot_ranger2 > STATIONARY_MARGIN)):
-			return "Moving Left"
-		elif ((tot_ranger1 > STATIONARY_MARGIN) or (tot_ranger2 < -STATIONARY_MARGIN)):
 			return "Moving Right"
+		elif ((tot_ranger1 > STATIONARY_MARGIN) or (tot_ranger2 < -STATIONARY_MARGIN)):
+			return "Moving Left"
 		else:
 			return "Can't tell"
 
