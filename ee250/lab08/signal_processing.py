@@ -22,6 +22,7 @@ AVERAGE_SIZE = 5
 ranger1_average = [0] * AVERAGE_SIZE
 ranger2_average = [0] * AVERAGE_SIZE
 
+OUT_OF_RANGE = 175
 STATIONARY_MARGIN = 30
 DIRECTIONAL_MARGIN = 100
 
@@ -85,7 +86,9 @@ def msg_direction(avg_list_ranger1, avg_list_ranger2):
 	print ("total ranger 1: " + str(tot_ranger1) + ", total ranger 2: " + str(tot_ranger2))
 
 	if (abs(tot_ranger1 + tot_ranger2) < STATIONARY_MARGIN):
-		if(avg_ranger1 > avg_ranger2 + DIRECTIONAL_MARGIN):
+		if ((avg_ranger1 > OUT_OF_RANGE) and (avg_ranger2 > OUT_OF_RANGE)):
+            return "No one there"
+        elif(avg_ranger1 > avg_ranger2 + DIRECTIONAL_MARGIN):
 			return "Still - Right"
 		elif (avg_ranger2 > avg_ranger1 + DIRECTIONAL_MARGIN):
 			return "Still - Left"
