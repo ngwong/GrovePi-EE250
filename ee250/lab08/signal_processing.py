@@ -16,8 +16,8 @@ ranger2_dist = []
 
 AVERAGE_SIZE = 10
 
-ranger1_average = []
-ranger2_average = []
+ranger1_average = [0] * AVERAGE_SIZE
+ranger2_average = [0] * AVERAGE_SIZE
 
 STATIONARY_MARGIN = 5
 DIRECTIONAL_MARGIN = 150
@@ -66,6 +66,7 @@ def update_average_ranger2():
 
 # Convert a list of size n to a list of the difference of the adjacent positions of size n - 1
 def calc_change(avg_list):
+	change_list = [0] * (len(avg_list) - 1)
 	for i in range(0, len(avg_list) - 1):
 		change_list[i] = avg_list[i] - avg_list[i + 1]
 	return change_list
@@ -77,6 +78,9 @@ def msg_direction(avg_list_ranger1, avg_list_ranger2):
 	tot_ranger1 = sum(calc_change(avg_list_ranger1))
 	tot_ranger2 = sum(calc_change(avg_list_ranger2))
 
+	print "average ranger 1: " + str(avg_list_ranger1) + ", average ranger 2: " + str(avg_list_ranger2)
+	print "total ranger 1" + str(tot_ranger1) + ", total ranger 2: " + str(tot_ranger2)
+
 	if (abs(tot_ranger1 + tot_ranger2) < STATIONARY_MARGIN):
 		if(avg_ranger1 > avg_ranger2 + DIRECTIONAL_MARGIN):
 			return "Still - Right"
@@ -87,7 +91,7 @@ def msg_direction(avg_list_ranger1, avg_list_ranger2):
 	else:
 		if ((tot_ranger1 < -STATIONARY_MARGIN) or (tot_ranger2 > STATIONARY_MARGIN)):
 			return "Moving Left"
-		elif ((tot_ranger1 > STATIONARY_MARGIN) or (tot_ranger2 < -STATIONARY_MARGIN))::
+		elif ((tot_ranger1 > STATIONARY_MARGIN) or (tot_ranger2 < -STATIONARY_MARGIN)):
 			return "Moving Right"
 		else:
 			return "Can't tell"
