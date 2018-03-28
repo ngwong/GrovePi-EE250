@@ -53,6 +53,19 @@ def on_message(client, userdata, msg):
 def update_average_ranger1():
 	ranger1_average.append(sum(ranger1_dist[-AVERAGE_SIZE])/AVERAGE_SIZE)
 	ranger1_average = ranger1_average[-MAX_LIST_LENGTH]
+<<<<<<< HEAD
+=======
+
+# This updates the moving average buffer so the newest element 
+# is the average of the last AVERAGE_SIZE of ranger1
+def update_average_ranger2():
+	ranger2_average.append(sum(ranger2_dist[-AVERAGE_SIZE])/AVERAGE_SIZE)
+	ranger2_average = ranger2_average[-MAX_LIST_LENGTH]
+
+
+def calc_change(list):
+	# TODO. Convert a list of size n to a list of the difference of the adjacent positions of size n - 1
+>>>>>>> 8f5a5234b54395be92642e74548a879b40f7f64b
 
 # This updates the moving average buffer so the newest element 
 # is the average of the last AVERAGE_SIZE of ranger1
