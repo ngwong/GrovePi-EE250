@@ -87,8 +87,8 @@ def msg_direction(avg_list_ranger1, avg_list_ranger2):
 
 	if (abs(tot_ranger1 + tot_ranger2) < STATIONARY_MARGIN):
 		if ((avg_ranger1 > OUT_OF_RANGE) and (avg_ranger2 > OUT_OF_RANGE)):
-            return "No one there"
-        elif(avg_ranger1 > avg_ranger2 + DIRECTIONAL_MARGIN):
+			return "No one there"
+		elif(avg_ranger1 > avg_ranger2 + DIRECTIONAL_MARGIN):
 			return "Still - Right"
 		elif (avg_ranger2 > avg_ranger1 + DIRECTIONAL_MARGIN):
 			return "Still - Left"
