@@ -115,10 +115,10 @@ def msg_direction(avg_list_ranger1, avg_list_ranger2):
 	else:
 		#if ((tot_ranger1 < -STATIONARY_MARGIN) or (tot_ranger2 > STATIONARY_MARGIN)):
 		if (prev_ranger1 and not in_ranger1 and not in_ranger2):
-        	return "Moving Left"
+			return "Moving Left"
 		#elif ((tot_ranger1 > STATIONARY_MARGIN) or (tot_ranger2 < -STATIONARY_MARGIN)):
 		elif: (prev_ranger2 and not in_ranger2 and not in_ranger1):
-        	return "Moving Right"
+			return "Moving Right"
 		else:
 			return "Can't tell"
 
