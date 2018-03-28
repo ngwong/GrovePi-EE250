@@ -19,7 +19,7 @@ AVERAGE_SIZE = 10
 ranger1_average = [0] * AVERAGE_SIZE
 ranger2_average = [0] * AVERAGE_SIZE
 
-STATIONARY_MARGIN = 5
+STATIONARY_MARGIN = 50
 DIRECTIONAL_MARGIN = 150
 
 
@@ -75,8 +75,8 @@ def msg_direction(avg_list_ranger1, avg_list_ranger2):
 	avg_ranger1 = sum(avg_list_ranger1)/len(avg_list_ranger1)
 	avg_ranger2 = sum(avg_list_ranger2)/len(avg_list_ranger2)
 
-	tot_ranger1 = sum(calc_change(avg_list_ranger1))
-	tot_ranger2 = sum(calc_change(avg_list_ranger2))
+	tot_ranger1 = sum(calc_change(avg_list_ranger1))/len(avg_list_ranger1)
+	tot_ranger2 = sum(calc_change(avg_list_ranger2))/len(avg_list_ranger2)
 
 	print ("average ranger 1: " + str(avg_list_ranger1) + ", average ranger 2: " + str(avg_list_ranger2))
 	print ("total ranger 1: " + str(tot_ranger1) + ", total ranger 2: " + str(tot_ranger2))
