@@ -104,7 +104,7 @@ def msg_direction(avg_list_ranger1, avg_list_ranger2):
 	print ("total ranger 1: " + str(tot_ranger1) + ", total ranger 2: " + str(tot_ranger2))
 
 	if (abs(tot_ranger1 + tot_ranger2) < STATIONARY_MARGIN):
-		if (!in_ranger1 and !in_ranger2):
+		if (not in_ranger1 and not in_ranger2):
 			return "No one there"
 		elif(avg_ranger1 > avg_ranger2 + DIRECTIONAL_MARGIN):
 			return "Still - Right"
@@ -114,10 +114,10 @@ def msg_direction(avg_list_ranger1, avg_list_ranger2):
 			return "Still - Middle"
 	else:
 		#if ((tot_ranger1 < -STATIONARY_MARGIN) or (tot_ranger2 > STATIONARY_MARGIN)):
-		if (prev_ranger1 and !in_ranger1 and !in_ranger2)
+		if (prev_ranger1 and not in_ranger1 and not in_ranger2)
         	return "Moving Left"
 		#elif ((tot_ranger1 > STATIONARY_MARGIN) or (tot_ranger2 < -STATIONARY_MARGIN)):
-		elif: (prev_ranger2 and !in_ranger2 and !in_ranger1)
+		elif: (prev_ranger2 and not in_ranger2 and not in_ranger1)
         	return "Moving Right"
 		else:
 			return "Can't tell"
