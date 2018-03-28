@@ -84,8 +84,8 @@ def msg_direction(avg_list_ranger1, avg_list_ranger2):
 	tot_ranger1 = sum(calc_change(avg_list_ranger1))/len(avg_list_ranger1)
 	tot_ranger2 = sum(calc_change(avg_list_ranger2))/len(avg_list_ranger2)
 
-    global in_ranger1
-    global in_ranger2
+	global in_ranger1
+	global in_ranger2
 
     prev_ranger1 = in_ranger1
     prev_ranger2 = in_ranger2
