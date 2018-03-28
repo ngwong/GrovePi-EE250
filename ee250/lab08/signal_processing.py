@@ -17,6 +17,8 @@ ranger2_dist = []
 ranger1_average = []
 ranger2_average = []
 
+
+
 def ranger1_callback(client, userdata, msg):
     global ranger1_dist
     ranger1_dist.append(int(msg.payload))
@@ -42,7 +44,10 @@ def on_connect(client, userdata, flags, rc):
 def on_message(client, userdata, msg): 
     print(msg.topic + " " + str(msg.payload))
 
-def calc_change(list):
+def calc_change(avg_list):
+	for i in range(0, len(avg_list)-1):
+		change_list[i] = avg_list[i] - avg_list[i+1]
+		
 	# TODO. Convert a list of size n to a list of the difference of the adjacent positions of size n - 1
 
 if __name__ == '__main__':
