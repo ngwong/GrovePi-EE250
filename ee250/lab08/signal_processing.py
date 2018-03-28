@@ -1,5 +1,8 @@
 import paho.mqtt.client as mqtt
 import time
+import requests
+import json
+from datetime import datetime
 
 # MQTT variables
 broker_hostname = "eclipse.usc.edu"
@@ -103,6 +106,11 @@ if __name__ == '__main__':
     client.on_message = on_message
     client.connect(broker_hostname, broker_port, 60)
     client.loop_start()
+
+    hdr = {
+    	'Content-Type': 'application/json',
+    	'Authorization': None
+    }
 
     while True:
         """ You have two lists, ranger1_dist and ranger2_dist, which hold a window
