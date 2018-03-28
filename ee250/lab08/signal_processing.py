@@ -26,6 +26,8 @@ OUT_OF_RANGE = 175
 STATIONARY_MARGIN = 30
 DIRECTIONAL_MARGIN = 100
 
+in_ranger1 = True
+in_ranger2 = True
 
 def ranger1_callback(client, userdata, msg):
     global ranger1_dist
@@ -82,11 +84,27 @@ def msg_direction(avg_list_ranger1, avg_list_ranger2):
 	tot_ranger1 = sum(calc_change(avg_list_ranger1))/len(avg_list_ranger1)
 	tot_ranger2 = sum(calc_change(avg_list_ranger2))/len(avg_list_ranger2)
 
+    global in_ranger1
+    global in_ranger2
+
+    prev_ranger1 = in_ranger1
+    prev_ranger2 = in_ranger2
+
+    if (avg_ranger1 > OUT_OF_RANGE):
+        in_ranger1 = False
+    else:
+        in_ranger1 = True
+
+    if (avg_ranger2 > OUT_OF_RANGE):
+        in_ranger2 = False
+    else:
+        in_ranger2 = True
+
 	print ("average ranger 1: " + str(avg_list_ranger1) + ", average ranger 2: " + str(avg_list_ranger2))
 	print ("total ranger 1: " + str(tot_ranger1) + ", total ranger 2: " + str(tot_ranger2))
 
 	if (abs(tot_ranger1 + tot_ranger2) < STATIONARY_MARGIN):
-		if ((avg_ranger1 > OUT_OF_RANGE) and (avg_ranger2 > OUT_OF_RANGE)):
+		if (!in_ranger1 and !in_ranger2):
 			return "No one there"
 		elif(avg_ranger1 > avg_ranger2 + DIRECTIONAL_MARGIN):
 			return "Still - Right"
@@ -95,10 +113,12 @@ def msg_direction(avg_list_ranger1, avg_list_ranger2):
 		else:
 			return "Still - Middle"
 	else:
-		if ((tot_ranger1 < -STATIONARY_MARGIN) or (tot_ranger2 > STATIONARY_MARGIN)):
-			return "Moving Right"
-		elif ((tot_ranger1 > STATIONARY_MARGIN) or (tot_ranger2 < -STATIONARY_MARGIN)):
-			return "Moving Left"
+		#if ((tot_ranger1 < -STATIONARY_MARGIN) or (tot_ranger2 > STATIONARY_MARGIN)):
+		if (prev_ranger1 and !in_ranger1 and !in_ranger2)
+        	return "Moving Left"
+		#elif ((tot_ranger1 > STATIONARY_MARGIN) or (tot_ranger2 < -STATIONARY_MARGIN)):
+		elif: (prev_ranger2 and !in_ranger2 and !in_ranger1)
+        	return "Moving Right"
 		else:
 			return "Can't tell"
 
@@ -117,13 +137,6 @@ if __name__ == '__main__':
         'Authorization': None #not using HTTP secure
     }
 
-    # The payload of our message starts as a simple dictionary. Before sending
-    # the HTTP message, we will format this into a json object
-    payload = {
-        'time': str(datetime.now()),
-        'event': msg_direction(ranger1_average[-AVERAGE_SIZE:], ranger2_average[-AVERAGE_SIZE:])
-    }
-
     while True:
         """ You have two lists, ranger1_dist and ranger2_dist, which hold a window
         of the past MAX_LIST_LENGTH samples published by ultrasonic ranger 1
@@ -132,6 +145,13 @@ if __name__ == '__main__':
         distances in centimeters to the closest object. Expect values between 
         0 and 512. However, these rangers do not detect people well beyond 
         ~125cm. """
+
+        # The payload of our message starts as a simple dictionary. Before sending
+        # the HTTP message, we will format this into a json object
+        payload = {
+            'time': str(datetime.now()),
+            'event': msg_direction(ranger1_average[-AVERAGE_SIZE:], ranger2_average[-AVERAGE_SIZE:])
+        }
 
         # Send an HTTP POST message and block until a response is given.
         # Note: requests() is NOT the same thing as request() under the flask 
