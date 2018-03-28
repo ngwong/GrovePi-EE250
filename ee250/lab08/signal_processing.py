@@ -24,12 +24,14 @@ def ranger1_callback(client, userdata, msg):
     ranger1_dist.append(int(msg.payload))
     #truncate list to only have the last MAX_LIST_LENGTH values
     ranger1_dist = ranger1_dist[-MAX_LIST_LENGTH:]
+    update_average_ranger1()
 
 def ranger2_callback(client, userdata, msg):
     global ranger2_dist
     ranger2_dist.append(int(msg.payload))
     #truncate list to only have the last MAX_LIST_LENGTH values
     ranger2_dist = ranger2_dist[-MAX_LIST_LENGTH:]
+    update_average_ranger2()
 
 # The callback for when the client receives a CONNACK response from the server.
 def on_connect(client, userdata, flags, rc):
@@ -48,11 +50,13 @@ def on_message(client, userdata, msg):
 # is the average of the last AVERAGE_SIZE of ranger1
 def update_average_ranger1():
 	ranger1_average.append(sum(ranger1_dist[-AVERAGE_SIZE])/AVERAGE_SIZE)
+	ranger1_average = ranger1_average[-MAX_LIST_LENGTH]
 
 # This updates the moving average buffer so the newest element 
 # is the average of the last AVERAGE_SIZE of ranger1
 def update_average_ranger2():
 	ranger2_average.append(sum(ranger2_dist[-AVERAGE_SIZE])/AVERAGE_SIZE)
+	ranger2_average = ranger2_average[-MAX_LIST_LENGTH]
 
 
 def calc_change(list):
