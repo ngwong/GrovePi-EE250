@@ -19,8 +19,8 @@ AVERAGE_SIZE = 10
 ranger1_average = [0] * AVERAGE_SIZE
 ranger2_average = [0] * AVERAGE_SIZE
 
-STATIONARY_MARGIN = 50
-DIRECTIONAL_MARGIN = 150
+STATIONARY_MARGIN = 20
+DIRECTIONAL_MARGIN = 100
 
 
 def ranger1_callback(client, userdata, msg):
