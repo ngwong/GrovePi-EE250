@@ -107,9 +107,18 @@ if __name__ == '__main__':
     client.connect(broker_hostname, broker_port, 60)
     client.loop_start()
 
+    # This header sets the HTTP request's mimetype to `application/json`. This
+    # means the payload of the HTTP message will be formatted as a json ojbect
     hdr = {
-    	'Content-Type': 'application/json',
-    	'Authorization': None
+        'Content-Type': 'application/json',
+        'Authorization': None #not using HTTP secure
+    }
+
+    # The payload of our message starts as a simple dictionary. Before sending
+    # the HTTP message, we will format this into a json object
+    payload = {
+        'time': str(datetime.now()),
+        'event': msg_direction(ranger1_average[-AVERAGE_SIZE:], ranger2_average[-AVERAGE_SIZE:])
     }
 
     while True:
@@ -120,12 +129,19 @@ if __name__ == '__main__':
         distances in centimeters to the closest object. Expect values between 
         0 and 512. However, these rangers do not detect people well beyond 
         ~125cm. """
+
+        # Send an HTTP POST message and block until a response is given.
+        # Note: requests() is NOT the same thing as request() under the flask 
+        # library.
+        response = requests.post("http://0.0.0.0:5000/post-event", headers = hdr,
+                                 data = json.dumps(payload))
+
+        # Print the json object from the HTTP response
+        print(response.json())
         
-        # TODO: detect movement and/or position
+        # print("ranger1: " + str(ranger1_dist[-1:]) + ", ranger2: " + str(ranger2_dist[-1:])) 
         
-        print("ranger1: " + str(ranger1_dist[-1:]) + ", ranger2: " + str(ranger2_dist[-1:])) 
-        
-        print("ranger1_average: " + str(ranger1_average[-1:]) + ", ranger2_average: " + str(ranger2_average[-1:]))
+        # print("ranger1_average: " + str(ranger1_average[-1:]) + ", ranger2_average: " + str(ranger2_average[-1:]))
 
         print(msg_direction(ranger1_average[-AVERAGE_SIZE:], ranger2_average[-AVERAGE_SIZE:]))
 
