@@ -19,6 +19,8 @@ AVERAGE_SIZE = 10
 ranger1_average = []
 ranger2_average = []
 
+STATIONARY_MARGIN = 5
+DIRECTIONAL_MARGIN = 150
 
 
 def ranger1_callback(client, userdata, msg):
@@ -68,6 +70,28 @@ def calc_change(avg_list):
 		change_list[i] = avg_list[i] - avg_list[i + 1]
 	return change_list
 
+def msg_direction(avg_list_ranger1, avg_list_ranger2):
+	avg_ranger1 = sum(avg_list_ranger1)/len(avg_list_ranger1)
+	avg_ranger2 = sum(avg_list_ranger2)/len(avg_list_ranger2)
+
+	tot_ranger1 = sum(calc_change(avg_list_ranger1))
+	tot_ranger2 = sum(calc_change(avg_list_ranger2))
+
+	if (abs(tot_ranger1 + tot_ranger2) < STATIONARY_MARGIN):
+		if(avg_ranger1 > avg_ranger2 + DIRECTIONAL_MARGIN):
+			return "Still - Right"
+		elif (avg_ranger2 > avg_ranger1 + DIRECTIONAL_MARGIN):
+			return "Still - Left"
+		else:
+			return "Still - Middle"
+	else:
+		if ((tot_ranger1 < -STATIONARY_MARGIN) or (tot_ranger2 > STATIONARY_MARGIN)):
+			return "Moving Left"
+		elif ((tot_ranger1 > STATIONARY_MARGIN) or (tot_ranger2 < -STATIONARY_MARGIN))::
+			return "Moving Right"
+		else:
+			return "Can't tell"
+
 if __name__ == '__main__':
     # Connect to broker and start loop    
     client = mqtt.Client()
@@ -90,5 +114,7 @@ if __name__ == '__main__':
         print("ranger1: " + str(ranger1_dist[-1:]) + ", ranger2: " + str(ranger2_dist[-1:])) 
         
         print("ranger1_average: " + str(ranger1_average[-1:]) + ", ranger2_average: " + str(ranger2_average[-1:]))
+
+        print(msg_direction(ranger1_average[-AVERAGE_SIZE:], ranger2_average[-AVERAGE_SIZE:]))
 
         time.sleep(0.2)
