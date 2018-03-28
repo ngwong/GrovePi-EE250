@@ -51,33 +51,21 @@ def on_message(client, userdata, msg):
 # This updates the moving average buffer so the newest element 
 # is the average of the last AVERAGE_SIZE of ranger1
 def update_average_ranger1():
-	ranger1_average.append(sum(ranger1_dist[-AVERAGE_SIZE])/AVERAGE_SIZE)
-	ranger1_average = ranger1_average[-MAX_LIST_LENGTH]
+	ranger1_average.append(sum(ranger1_dist[-AVERAGE_SIZE:])/AVERAGE_SIZE)
+	ranger1_average = ranger1_average[-MAX_LIST_LENGTH:]
 
 # This updates the moving average buffer so the newest element 
 # is the average of the last AVERAGE_SIZE of ranger1
 def update_average_ranger2():
-	ranger2_average.append(sum(ranger2_dist[-AVERAGE_SIZE])/AVERAGE_SIZE)
-	ranger2_average = ranger2_average[-MAX_LIST_LENGTH]
+	ranger2_average.append(sum(ranger2_dist[-AVERAGE_SIZE:])/AVERAGE_SIZE)
+	ranger2_average = ranger2_average[-MAX_LIST_LENGTH:]
 
 # Convert a list of size n to a list of the difference of the adjacent positions of size n - 1
 def calc_change(avg_list):
 	for i in range(0, len(avg_list) - 1):
 		change_list[i] = avg_list[i] - avg_list[i + 1]
 	return change_list
-	
-# This updates the moving average buffer so the newest element 
-# is the average of the last AVERAGE_SIZE of ranger1
-def update_average_ranger2():
-	ranger2_average.append(sum(ranger2_dist[-AVERAGE_SIZE])/AVERAGE_SIZE)
-	ranger2_average = ranger2_average[-MAX_LIST_LENGTH]
 
-
-def calc_change(avg_list):
-	for i in range(0, len(avg_list)-1):
-		change_list[i] = avg_list[i] - avg_list[i+1]
-	return change_list
-	
 if __name__ == '__main__':
     # Connect to broker and start loop    
     client = mqtt.Client()
@@ -99,6 +87,6 @@ if __name__ == '__main__':
         
         print("ranger1: " + str(ranger1_dist[-1:]) + ", ranger2: " + str(ranger2_dist[-1:])) 
         
-        print("ranger1_average: ") + str(ranger1_average[-1] + ", ranger2_average: " + str(ranger2_average[-1]))
+        print("ranger1_average: ") + str(ranger1_average[-1:] + ", ranger2_average: " + str(ranger2_average[-1:]))
 
         time.sleep(0.2)
