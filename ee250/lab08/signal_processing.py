@@ -14,7 +14,7 @@ MAX_LIST_LENGTH = 100
 ranger1_dist = []
 ranger2_dist = []
 
-AVERAGE_SIZE = 10
+AVERAGE_SIZE = 5
 
 ranger1_average = [0] * AVERAGE_SIZE
 ranger2_average = [0] * AVERAGE_SIZE
