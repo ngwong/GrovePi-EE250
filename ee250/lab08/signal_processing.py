@@ -46,10 +46,16 @@ def on_connect(client, userdata, flags, rc):
 def on_message(client, userdata, msg): 
     print(msg.topic + " " + str(msg.payload))
 
-# This updates the moving average buffer so the newest element is the average of the last AVERAGE_SIZE
-def update_average():
+# This updates the moving average buffer so the newest element 
+# is the average of the last AVERAGE_SIZE of ranger1
+def update_average_ranger1():
 	ranger1_average.append(sum(ranger1_dist[-AVERAGE_SIZE])/AVERAGE_SIZE)
-	ranger1_average.append(sum(ranger2_dist[-AVERAGE_SIZE])/AVERAGE_SIZE)
+
+# This updates the moving average buffer so the newest element 
+# is the average of the last AVERAGE_SIZE of ranger1
+def update_average_ranger2():
+	ranger2_average.append(sum(ranger2_dist[-AVERAGE_SIZE])/AVERAGE_SIZE)
+
 
 def calc_change(avg_list):
 	for i in range(0, len(avg_list)-1):
