@@ -14,6 +14,8 @@ MAX_LIST_LENGTH = 100
 ranger1_dist = []
 ranger2_dist = []
 
+AVERAGE_SIZE = 10
+
 ranger1_average = []
 ranger2_average = []
 
@@ -44,12 +46,16 @@ def on_connect(client, userdata, flags, rc):
 def on_message(client, userdata, msg): 
     print(msg.topic + " " + str(msg.payload))
 
+# This updates the moving average buffer so the newest element is the average of the last AVERAGE_SIZE
+def update_average():
+	ranger1_average.append(sum(ranger1_dist[-AVERAGE_SIZE])/AVERAGE_SIZE)
+	ranger1_average.append(sum(ranger2_dist[-AVERAGE_SIZE])/AVERAGE_SIZE)
+
 def calc_change(avg_list):
 	for i in range(0, len(avg_list)-1):
 		change_list[i] = avg_list[i] - avg_list[i+1]
-		
-	# TODO. Convert a list of size n to a list of the difference of the adjacent positions of size n - 1
-
+	return change_list
+	
 if __name__ == '__main__':
     # Connect to broker and start loop    
     client = mqtt.Client()
