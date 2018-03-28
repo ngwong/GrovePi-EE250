@@ -87,18 +87,18 @@ def msg_direction(avg_list_ranger1, avg_list_ranger2):
 	global in_ranger1
 	global in_ranger2
 
-    prev_ranger1 = in_ranger1
-    prev_ranger2 = in_ranger2
+	prev_ranger1 = in_ranger1
+	prev_ranger2 = in_ranger2
 
-    if (avg_ranger1 > OUT_OF_RANGE):
-        in_ranger1 = False
-    else:
-        in_ranger1 = True
+	if (avg_ranger1 > OUT_OF_RANGE):
+		in_ranger1 = False
+	else:
+		in_ranger1 = True
 
-    if (avg_ranger2 > OUT_OF_RANGE):
-        in_ranger2 = False
-    else:
-        in_ranger2 = True
+	if (avg_ranger2 > OUT_OF_RANGE):
+		in_ranger2 = False
+	else:
+		in_ranger2 = True
 
 	print ("average ranger 1: " + str(avg_list_ranger1) + ", average ranger 2: " + str(avg_list_ranger2))
 	print ("total ranger 1: " + str(tot_ranger1) + ", total ranger 2: " + str(tot_ranger2))
