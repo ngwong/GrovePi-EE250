@@ -87,6 +87,6 @@ if __name__ == '__main__':
         
         print("ranger1: " + str(ranger1_dist[-1:]) + ", ranger2: " + str(ranger2_dist[-1:])) 
         
-        print("ranger1_average: ") + str(ranger1_average[-1:] + ", ranger2_average: " + str(ranger2_average[-1:]))
+        print("ranger1_average: ") + str(ranger1_average[-1:]) + ", ranger2_average: " + str(ranger2_average[-1:]))
 
         time.sleep(0.2)
