@@ -79,7 +79,7 @@ def msg_direction(avg_list_ranger1, avg_list_ranger2):
 	tot_ranger2 = sum(calc_change(avg_list_ranger2))
 
 	print ("average ranger 1: " + str(avg_list_ranger1) + ", average ranger 2: " + str(avg_list_ranger2))
-	print ("total ranger 1" + str(tot_ranger1) + ", total ranger 2: " + str(tot_ranger2))
+	print ("total ranger 1: " + str(tot_ranger1) + ", total ranger 2: " + str(tot_ranger2))
 
 	if (abs(tot_ranger1 + tot_ranger2) < STATIONARY_MARGIN):
 		if(avg_ranger1 > avg_ranger2 + DIRECTIONAL_MARGIN):
