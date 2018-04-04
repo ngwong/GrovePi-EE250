@@ -22,7 +22,7 @@ AVERAGE_SIZE = 5
 ranger1_average = [0] * AVERAGE_SIZE
 ranger2_average = [0] * AVERAGE_SIZE
 
-OUT_OF_RANGE = 175
+OUT_OF_RANGE = 150
 STATIONARY_MARGIN = 30
 DIRECTIONAL_MARGIN = 100
 
@@ -91,7 +91,7 @@ def msg_direction(avg_list_ranger1, avg_list_ranger2):
 	prev_ranger1 = in_ranger1
 	prev_ranger2 = in_ranger2
 
-	if (avg_list_ranger1[-1:][0] > OUT_OF_RANGE):
+	'''if (avg_list_ranger1[-1:][0] > OUT_OF_RANGE):
 		in_ranger1 = False
 	else:
 		in_ranger1 = True
@@ -100,12 +100,37 @@ def msg_direction(avg_list_ranger1, avg_list_ranger2):
 		in_ranger2 = False
 	else:
 		in_ranger2 = True
+'''
+
+	if (avg_ranger1[-1:][0] > OUT_OF_RANGE):
+		in_ranger1 = False
+	else:
+		in_ranger1 = True
+
+	if (avg_ranger2[-1:][0] > OUT_OF_RANGE):
+		in_ranger2 = False
+	else:
+		in_ranger2 = True
 
 	# End of state machine approach
 
-	print ("average ranger 1: " + str(avg_list_ranger1) + ", average ranger 2: " + str(avg_list_ranger2))
-	print ("total ranger 1: " + str(tot_ranger1) + ", total ranger 2: " + str(tot_ranger2))
+	#print ("average ranger 1: " + str(avg_list_ranger1) + ", average ranger 2: " + str(avg_list_ranger2))
+	#print ("total ranger 1: " + str(tot_ranger1) + ", total ranger 2: " + str(tot_ranger2))
 
+	if (prev_ranger1 and not prev_ranger2 and not in_ranger1 and not in_ranger2):
+		return "Moving Left"
+	elif (prev_ranger2 and not prev_ranger1 and not in_ranger2 and not in_ranger1):
+		return "Moving Right"
+	elif (not in_ranger1 and not in_ranger2 and not prev_ranger1 and not prev_ranger2):
+		return "No one there"
+	elif(in_ranger2 and prev_ranger2 and not in_ranger1 and not prev_ranger1):
+		return "Still - Right"
+	elif (in_ranger1 and prev_ranger1 and not in_ranger2 and not prev_ranger2):
+		return "Still - Left"
+	else:
+		return "Still - Middle"
+
+'''
 	if (abs(tot_ranger1 + tot_ranger2) < STATIONARY_MARGIN):
 		if (not in_ranger1 and not in_ranger2):
 			return "No one there"
@@ -117,14 +142,14 @@ def msg_direction(avg_list_ranger1, avg_list_ranger2):
 			return "Still - Middle"
 	else:
 		#if ((tot_ranger1 < -STATIONARY_MARGIN) or (tot_ranger2 > STATIONARY_MARGIN)):
-		if (prev_ranger1 and not in_ranger1 and not in_ranger2):
+		if (prev_ranger1 and not in_ranger1 and not in_ranger2 and not prev_ranger2):
 			return "Moving Left"
 		#elif ((tot_ranger1 > STATIONARY_MARGIN) or (tot_ranger2 < -STATIONARY_MARGIN)):
-		elif (prev_ranger2 and not in_ranger2 and not in_ranger1):
+		elif (prev_ranger2 and not in_ranger2 and not in_ranger1 and not prev_ranger1):
 			return "Moving Right"
 		else:
 			return "Can't tell"
-
+'''
 if __name__ == '__main__':
     # Connect to broker and start loop    
     client = mqtt.Client()
