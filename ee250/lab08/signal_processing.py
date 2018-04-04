@@ -91,6 +91,11 @@ def msg_direction(avg_list_ranger1, avg_list_ranger2):
 	prev_ranger1 = in_ranger1
 	prev_ranger2 = in_ranger2
 
+	# in_ranger1 tells if there is something in the range of the first sensor
+	# in_ranger2 tells if there is something in the range of the second sensor
+	# prev_ranger1 tells if there was something in the range of the first sensor
+	# prev_ranger2 tells if there was something in the range of the second sensor
+
 	'''if (avg_list_ranger1[-1:][0] > OUT_OF_RANGE):
 		in_ranger1 = False
 	else:
@@ -102,12 +107,12 @@ def msg_direction(avg_list_ranger1, avg_list_ranger2):
 		in_ranger2 = True
 '''
 
-	if (avg_ranger1[-1:][0] > OUT_OF_RANGE):
+	if (avg_ranger1 > OUT_OF_RANGE):
 		in_ranger1 = False
 	else:
 		in_ranger1 = True
 
-	if (avg_ranger2[-1:][0] > OUT_OF_RANGE):
+	if (avg_ranger2 > OUT_OF_RANGE):
 		in_ranger2 = False
 	else:
 		in_ranger2 = True
@@ -117,9 +122,9 @@ def msg_direction(avg_list_ranger1, avg_list_ranger2):
 	#print ("average ranger 1: " + str(avg_list_ranger1) + ", average ranger 2: " + str(avg_list_ranger2))
 	#print ("total ranger 1: " + str(tot_ranger1) + ", total ranger 2: " + str(tot_ranger2))
 
-	if (prev_ranger1 and not prev_ranger2 and not in_ranger1 and not in_ranger2):
+	if ((prev_ranger1 and not prev_ranger2 and not in_ranger1 and not in_ranger2) or (in_ranger2 and not prev_ranger2 and not in_ranger1 and not prev_ranger1)):
 		return "Moving Left"
-	elif (prev_ranger2 and not prev_ranger1 and not in_ranger2 and not in_ranger1):
+	elif ((prev_ranger2 and not prev_ranger1 and not in_ranger2 and not in_ranger1) or (in_ranger1 and not prev_ranger2 and not in_ranger2 and not prev_ranger1)):
 		return "Moving Right"
 	elif (not in_ranger1 and not in_ranger2 and not prev_ranger1 and not prev_ranger2):
 		return "No one there"
