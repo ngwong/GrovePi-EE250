@@ -81,9 +81,6 @@ def msg_direction(avg_list_ranger1, avg_list_ranger2):
 	avg_ranger1 = sum(avg_list_ranger1)/len(avg_list_ranger1)
 	avg_ranger2 = sum(avg_list_ranger2)/len(avg_list_ranger2)
 
-	tot_ranger1 = sum(calc_change(avg_list_ranger1))/len(avg_list_ranger1)
-	tot_ranger2 = sum(calc_change(avg_list_ranger2))/len(avg_list_ranger2)
-
 	# Start of state machine approach
 	global in_ranger1
 	global in_ranger2
@@ -95,17 +92,6 @@ def msg_direction(avg_list_ranger1, avg_list_ranger2):
 	# in_ranger2 tells if there is something in the range of the second sensor
 	# prev_ranger1 tells if there was something in the range of the first sensor
 	# prev_ranger2 tells if there was something in the range of the second sensor
-
-	'''if (avg_list_ranger1[-1:][0] > OUT_OF_RANGE):
-		in_ranger1 = False
-	else:
-		in_ranger1 = True
-
-	if (avg_list_ranger2[-1:][0] > OUT_OF_RANGE):
-		in_ranger2 = False
-	else:
-		in_ranger2 = True
-'''
 
 	if (avg_ranger1 > OUT_OF_RANGE):
 		in_ranger1 = False
@@ -119,42 +105,27 @@ def msg_direction(avg_list_ranger1, avg_list_ranger2):
 
 	# End of state machine approach
 
-	#print ("average ranger 1: " + str(avg_list_ranger1) + ", average ranger 2: " + str(avg_list_ranger2))
-	#print ("total ranger 1: " + str(tot_ranger1) + ", total ranger 2: " + str(tot_ranger2))
+	# Note: ranger1 is the left ranger and ranger2 is the right ranger
 
+	# if the object comes into view of ranger 1 from the right or ranger 2 from the left
 	if ((prev_ranger1 and not prev_ranger2 and not in_ranger1 and not in_ranger2) or (in_ranger2 and not prev_ranger2 and not in_ranger1 and not prev_ranger1)):
 		return "Moving Left"
+	# if the object comes into view of ranger 1 from the left or ranger 2 from the right
 	elif ((prev_ranger2 and not prev_ranger1 and not in_ranger2 and not in_ranger1) or (in_ranger1 and not prev_ranger2 and not in_ranger2 and not prev_ranger1)):
 		return "Moving Right"
+	# if nothing is or was detected by any of the sensors
 	elif (not in_ranger1 and not in_ranger2 and not prev_ranger1 and not prev_ranger2):
 		return "No one there"
+	# if it is and was only in range of ranger 2
 	elif(in_ranger2 and prev_ranger2 and not in_ranger1 and not prev_ranger1):
 		return "Still - Right"
+	# if it is and was only in range of ranger 1
 	elif (in_ranger1 and prev_ranger1 and not in_ranger2 and not prev_ranger2):
 		return "Still - Left"
+	# if it is in range and was in range of everything
 	else:
 		return "Still - Middle"
 
-'''
-	if (abs(tot_ranger1 + tot_ranger2) < STATIONARY_MARGIN):
-		if (not in_ranger1 and not in_ranger2):
-			return "No one there"
-		elif(avg_ranger1 > avg_ranger2 + DIRECTIONAL_MARGIN):
-			return "Still - Right"
-		elif (avg_ranger2 > avg_ranger1 + DIRECTIONAL_MARGIN):
-			return "Still - Left"
-		else:
-			return "Still - Middle"
-	else:
-		#if ((tot_ranger1 < -STATIONARY_MARGIN) or (tot_ranger2 > STATIONARY_MARGIN)):
-		if (prev_ranger1 and not in_ranger1 and not in_ranger2 and not prev_ranger2):
-			return "Moving Left"
-		#elif ((tot_ranger1 > STATIONARY_MARGIN) or (tot_ranger2 < -STATIONARY_MARGIN)):
-		elif (prev_ranger2 and not in_ranger2 and not in_ranger1 and not prev_ranger1):
-			return "Moving Right"
-		else:
-			return "Can't tell"
-'''
 if __name__ == '__main__':
     # Connect to broker and start loop    
     client = mqtt.Client()
