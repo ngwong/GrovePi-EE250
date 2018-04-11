@@ -63,5 +63,5 @@ if __name__ == '__main__':
         #     setText("Button pressed!")#prints out to LCD
 
 
-        client.publish("anrg-pi10/ultrasonicRanger", grovepi.ultrasonicRead(ultra))#publishes ultrasonic data
+        # client.publish("anrg-pi10/ultrasonicRanger", grovepi.ultrasonicRead(ultra))#publishes ultrasonic data
         time.sleep(1) #timer so that ultrasonic only sends every second
