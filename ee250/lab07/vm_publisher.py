@@ -23,16 +23,22 @@ def on_press(key):
     
     if k == 'w':
         print("w")
+        client.publish("anrg-pi10/lcd", "w")
         #send "w" character to rpi
     elif k == 'a':
         print("a")
+        client.publish("anrg-pi10/lcd", "a")
+        client.publish("anrg-pi10/led", "LED_ON")
         # send "a" character to rpi
         #send "LED_ON"
     elif k == 's':
+        client.publish("anrg-pi10/lcd", "s")
         print("s")
         # send "s" character to rpi
     elif k == 'd':
         print("d")
+        client.publish("anrg-pi10/lcd", "d")
+        client.publish("anrg-pi10/led", "LED_OFF")
         # send "d" character to rpi
         # send "LED_OFF"
 
@@ -49,7 +55,5 @@ if __name__ == '__main__':
     client.loop_start()
 
     while True:
-        print("delete this line")
+        #print("delete this line")
         time.sleep(1)
-            
-

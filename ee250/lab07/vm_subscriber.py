@@ -5,14 +5,34 @@ Run vm_subscriber.py in a separate terminal on your VM."""
 import paho.mqtt.client as mqtt
 import time
 
-def on_connect(client, userdata, flags, rc):
+#ultrasonic = ""
+
+def on_connect(client, userdata, flags, rc): #sets up where to subscribe to
     print("Connected to server (i.e., broker) with result code "+str(rc))
 
+    client.subscribe("anrg-pi10/ultrasonicRanger") #subscribes to specific channel
+    client.message_callback_add("anrg-pi10/ultrasonicRanger", custom_callback_ultrasonic) #adds where to pass info to
+
+    client.subscribe("anrg-pi10/button")#subsrcibes to specific channel
+    client.message_callback_add("anrg-pi10/button", custom_callback_button) #adds where to pass info to
     #subscribe to the ultrasonic ranger topic here
 
 #Default message callback. Please use custom callbacks.
 def on_message(client, userdata, msg):
     print("on_message: " + msg.topic + " " + str(msg.payload, "utf-8"))
+
+#Custom callbacks need to be structured with three args like on_message()
+def custom_callback_ultrasonic(client, userdata, message):
+    #the third argument is 'message' here unlike 'msg' in on_message 
+    ultrasonic = str(message.payload, "utf-8") #converts message payload into str from byte string
+    print("custom_callback_ultrasonic: " + message.topic + " " + ultrasonic)
+    print("custom_callback_ultrasonic: message.payload is of type " + 
+          str(type(message.payload)))
+
+def custom_callback_button(client, userdata, message):
+#callback for button press info
+    convMessage = str(message.payload, "utf-8") #converts bit str to string
+    print(convMessage) #prints message
 
 if __name__ == '__main__':
     #this section is covered in publisher_and_subscriber_example.py
@@ -23,7 +43,8 @@ if __name__ == '__main__':
     client.loop_start()
 
     while True:
-        print("delete this line")
-        time.sleep(1)
+        True #loop nescessary to keep program running
+        #print('\n')
+        #time.sleep(1)
             
 
