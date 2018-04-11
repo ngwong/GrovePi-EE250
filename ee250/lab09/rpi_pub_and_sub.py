@@ -59,11 +59,13 @@ if __name__ == '__main__':
     client.connect(host="eclipse.usc.edu", port=11000, keepalive=60)
     client.loop_start()
 
-    while True:
+    while True:  
 
-
-    	# client.publish("anrg-pi10/temperature", temperature)
-    	# client.publish("anrg-pi10/humidity", humidity)
+        [humidity, temperature] = dht(humidity_temperature, 1)
+        #storing the humidity and temperature data
+        
+    	client.publish("anrg-pi10/temperature", temperature)
+    	client.publish("anrg-pi10/humidity", humidity)
 
         #print("delete this line")
         # if (grovepi.digitalRead(button) > 0):#checks for button press
