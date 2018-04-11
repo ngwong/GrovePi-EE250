@@ -66,7 +66,7 @@ if __name__ == '__main__':
         [humidity, temperature] = dht(humidity_temperature, 1)
 
         # Publishing the data to the MQTT server
-        client.publish("anrg-pi10/temperature", temperature)
+		client.publish("anrg-pi10/temperature", temperature)
 		client.publish("anrg-pi10/humidity", humidity)
 
         # client.publish("anrg-pi10/ultrasonicRanger", grovepi.ultrasonicRead(ultra))#publishes ultrasonic data
