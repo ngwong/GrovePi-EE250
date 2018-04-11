@@ -15,7 +15,7 @@ humidity_temperature = 2
 def on_connect(client, userdata, flags, rc):
     print("Connected to server (i.e., broker) with result code "+str(rc))
 
-    grovepi.pinMode(button, "INPUT")
+    # grovepi.pinMode(button, "INPUT")
 
     client.subscribe("anrg-pi10/led")
     client.message_callback_add("anrg-pi10/led", custom_callback_led)
