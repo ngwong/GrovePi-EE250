@@ -65,6 +65,9 @@ if __name__ == '__main__':
 		# Storing the humidity and temperature data
 		[humidity, temperature] = dht(humidity_temperature, 1)
 
+		print humidity
+		print temperature
+
 		# Publishing the data to the MQTT server
 		client.publish("anrg-pi10/temperature", str(temperature))
 		client.publish("anrg-pi10/humidity", str(humidity))
