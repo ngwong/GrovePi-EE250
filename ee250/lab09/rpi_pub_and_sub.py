@@ -12,6 +12,8 @@ from grove_rgb_lcd import *
 led = 3
 humidity_temperature = 2
 
+led_status = 0
+
 def on_connect(client, userdata, flags, rc):
     print("Connected to server (i.e., broker) with result code "+str(rc))
 
@@ -34,8 +36,8 @@ def custom_callback_led(client, userdata, message):
     convMessage = str(message.payload, "utf-8") #converts massage payload from byte string to string
     if ("LED_toggle" in convMessage): #checks payload if the LED needs to be toggled
         try:
-        	print(digitalRead(led))
-        	digitalWrite(led, 1 if digitalRead(led) is 0 else 0)  #toggles LED
+        	digitalWrite(led, 1 if led_status is 0 else 0)  #toggles LED
+        	led_status = 1 if led_status is 0 else 0
         except IOError:
             print ("Error")
 
@@ -58,7 +60,6 @@ if __name__ == '__main__':
 
     while True:
         
-
 
     	# client.publish("anrg-pi10/temperature", temperature)
     	# client.publish("anrg-pi10/humidity", humidity)
