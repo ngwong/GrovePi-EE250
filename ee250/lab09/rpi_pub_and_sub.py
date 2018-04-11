@@ -69,5 +69,4 @@ if __name__ == '__main__':
 		client.publish("anrg-pi10/temperature", str(temperature) + " C")
 		client.publish("anrg-pi10/humidity", str(humidity) + "%")
 
-		# client.publish("anrg-pi10/ultrasonicRanger", grovepi.ultrasonicRead(ultra))#publishes ultrasonic data
 		time.sleep(1) #timer so that ultrasonic only sends every second
