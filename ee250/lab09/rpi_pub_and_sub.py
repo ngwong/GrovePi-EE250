@@ -10,7 +10,7 @@ import grovepi
 from grove_rgb_lcd import *
 
 led = 3
-humidity_temperature = 2
+humidity_temperature = 7
 
 led_status = 0
 
