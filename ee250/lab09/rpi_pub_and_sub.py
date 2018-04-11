@@ -9,11 +9,8 @@ import grovepi
 
 from grove_rgb_lcd import *
 
-led = 6
-ultra = 5
-
-button = 3
-
+led = 3
+humidity_temperature = 2
 
 def on_connect(client, userdata, flags, rc):
     print("Connected to server (i.e., broker) with result code "+str(rc))
@@ -35,14 +32,9 @@ def on_message(client, userdata, msg):
 def custom_callback_led(client, userdata, message):
     #the third argument is 'message' here unlike 'msg' in on_message
     convMessage = str(message.payload, "utf-8") #converts massage payload from byte string to string
-    if ("LED_ON" in convMessage): #checks payload if LED ON
+    if ("LED_toggle" in convMessage): #checks payload if the LED needs to be toggled
         try:
-            digitalWrite(led, 1) #turns on LED
-        except IOError:
-            print ("Error")
-    elif ("LED_OFF" in convMessage ): #checks payload if LED OFF
-        try:
-            digitalWrite(led, 0) #turns off LED
+            digitalWrite(led, 1 if digitalRead(led) is 0 else 0)  #toggles LED
         except IOError:
             print ("Error")
 
