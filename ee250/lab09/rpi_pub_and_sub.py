@@ -1,6 +1,4 @@
-"""EE 250L Lab 07 Skeleton Code
-
-Run rpi_pub_and_sub.py on your Raspberry Pi."""
+# Run rpi_pub_and_sub.py on your Raspberry Pi."""
 
 import paho.mqtt.client as mqtt
 import time
