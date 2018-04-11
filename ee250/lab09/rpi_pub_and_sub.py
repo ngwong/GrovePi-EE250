@@ -36,8 +36,8 @@ def custom_callback_led(client, userdata, message):
     convMessage = str(message.payload, "utf-8") #converts massage payload from byte string to string
     if ("LED_toggle" in convMessage): #checks payload if the LED needs to be toggled
         try:
-        	digitalWrite(led, 1 if led_status is 0 else 0)  #toggles LED
         	led_status = 1 if led_status is 0 else 0
+        	digitalWrite(led, led_status)  #toggles LED
         except IOError:
             print ("Error")
 
@@ -59,7 +59,6 @@ if __name__ == '__main__':
     client.loop_start()
 
     while True:
-        
 
     	# client.publish("anrg-pi10/temperature", temperature)
     	# client.publish("anrg-pi10/humidity", humidity)
