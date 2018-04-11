@@ -58,9 +58,9 @@ if __name__ == '__main__':
     while True:
         
         #print("delete this line")
-        if (grovepi.digitalRead(button) > 0):#checks for button press
-            client.publish("anrg-pi10/button", "Button pressed!")#publishes button press data
-            setText("Button pressed!")#prints out to LCD
+        # if (grovepi.digitalRead(button) > 0):#checks for button press
+        #     client.publish("anrg-pi10/button", "Button pressed!")#publishes button press data
+        #     setText("Button pressed!")#prints out to LCD
 
 
         client.publish("anrg-pi10/ultrasonicRanger", grovepi.ultrasonicRead(ultra))#publishes ultrasonic data
