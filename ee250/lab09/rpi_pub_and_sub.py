@@ -67,7 +67,7 @@ if __name__ == '__main__':
 
         # Publishing the data to the MQTT server
         client.publish("anrg-pi10/temperature", temperature)
-    	client.publish("anrg-pi10/humidity", humidity)
+		client.publish("anrg-pi10/humidity", humidity)
 
         # client.publish("anrg-pi10/ultrasonicRanger", grovepi.ultrasonicRead(ultra))#publishes ultrasonic data
         time.sleep(1) #timer so that ultrasonic only sends every second
