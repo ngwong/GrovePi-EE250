@@ -63,7 +63,7 @@ if __name__ == '__main__':
 
 
 		# Storing the humidity and temperature data
-		[humidity, temperature] = dht(humidity_temperature, 1)
+		[humidity, temperature] = dht(humidity_temperature, 0)
 
 		print("Humidity = " + str(humidity) + ", Temperature = " + str(temperature))
 
