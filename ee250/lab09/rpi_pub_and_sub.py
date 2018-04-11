@@ -61,17 +61,13 @@ if __name__ == '__main__':
 
     while True:  
 
+
+        # Storing the humidity and temperature data
         [humidity, temperature] = dht(humidity_temperature, 1)
-        #storing the humidity and temperature data
-        
-    	client.publish("anrg-pi10/temperature", temperature)
+
+        # Publishing the data to the MQTT server
+        client.publish("anrg-pi10/temperature", temperature)
     	client.publish("anrg-pi10/humidity", humidity)
-
-        #print("delete this line")
-        # if (grovepi.digitalRead(button) > 0):#checks for button press
-        #     client.publish("anrg-pi10/button", "Button pressed!")#publishes button press data
-        #     setText("Button pressed!")#prints out to LCD
-
 
         # client.publish("anrg-pi10/ultrasonicRanger", grovepi.ultrasonicRead(ultra))#publishes ultrasonic data
         time.sleep(1) #timer so that ultrasonic only sends every second
