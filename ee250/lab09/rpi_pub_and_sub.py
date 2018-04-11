@@ -34,6 +34,7 @@ def custom_callback_led(client, userdata, message):
     convMessage = str(message.payload, "utf-8") #converts massage payload from byte string to string
     if ("LED_toggle" in convMessage): #checks payload if the LED needs to be toggled
         try:
+        	print (digitalRead(led))
             digitalWrite(led, 1 if digitalRead(led) is 0 else 0)  #toggles LED
         except IOError:
             print ("Error")
