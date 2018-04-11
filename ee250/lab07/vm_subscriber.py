@@ -19,7 +19,7 @@ def on_connect(client, userdata, flags, rc): #sets up where to subscribe to
 
 #Default message callback. Please use custom callbacks.
 def on_message(client, userdata, msg):
-    print("on_message: " + msg.topic + " " + str(msg.payload))
+    print("on_message: " + msg.topic + " " + str(msg.payload, "utf-8"))
 
 #Custom callbacks need to be structured with three args like on_message()
 def custom_callback_ultrasonic(client, userdata, message):
