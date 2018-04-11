@@ -17,8 +17,6 @@ led_status = 0
 def on_connect(client, userdata, flags, rc):
 	print("Connected to server (i.e., broker) with result code "+str(rc))
 
-	# grovepi.pinMode(button, "INPUT")
-
 	client.subscribe("anrg-pi10/led")
 	client.message_callback_add("anrg-pi10/led", custom_callback_led)
 
@@ -60,8 +58,6 @@ if __name__ == '__main__':
 	client.loop_start()
 
 	while True:  
-
-
 		# Storing the humidity and temperature data
 		[humidity, temperature] = dht(humidity_temperature, 0)
 
